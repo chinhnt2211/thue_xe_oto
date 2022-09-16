@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Image;
-use App\Models\Location;
+use App\Models\Ward;
 use App\Models\Station;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +23,8 @@ class AdminFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->safeEmail(),
-            'location_id' => $this->faker->unique()->randomElement(Location::query()->where('type', '=', 0)->get('id')),
+            'address_line_2' => $this->faker->unique()->randomElement(Ward::query()->get('id')),
+            'address_line_1' => $this->faker->streetAddress(),
             'phone' => $this->faker->regexify('0[0-9]{9}'),
             'password' => $this->faker->password(),
             'cic_number' => $this->faker->regexify('0[0-9]{11}'),

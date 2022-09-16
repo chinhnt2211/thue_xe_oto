@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubdistrictsTable extends Migration
+class CreateCitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateSubdistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subdistricts', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type');
             $table->string('slug');
+            $table->string('type');
             $table->string('name_with_type');
-            $table->string('path');
             $table->string('path_with_type');
-            $table->foreignId('district_id');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateSubdistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subdistricts');
+        Schema::dropIfExists('cities');
     }
 }

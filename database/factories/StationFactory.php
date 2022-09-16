@@ -19,7 +19,8 @@ class StationFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'location_id' => $this->faker->unique()->randomElement(Location::query()->where('type', '=',0)->get('id')),
+            'address_line_2' => $this->faker->unique()->randomElement(Subdistrict::query()->get('id')),
+            'address_line_1' => $this->faker->streetAddress(),
             'phone' => $this->faker->regexify('0[0-9]{9}'),
             'capacity' => $this->faker->numberBetween(100, 500),
         ];

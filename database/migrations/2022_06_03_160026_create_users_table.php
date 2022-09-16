@@ -19,14 +19,11 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->foreignId('location_id');
+            $table->string('address_line_1')->nullable();
+            $table->unsignedBigInteger('address_line_2')->nullable();
+            $table->foreign('address_line_2')->references('id')->on('wards');
             $table->string('phone',15);
             $table->string('password');
-            $table->string('cic_number',12)->nullable();
-            $table->unsignedBigInteger('cic_front')->nullable();
-            $table->unsignedBigInteger('cic_back')->nullable();
-            $table->foreign('cic_front')->references('id')->on('images');
-            $table->foreign('cic_back')->references('id')->on('images');
             $table->date('dob');
             $table->tinyInteger('gender');
             $table->unsignedBigInteger('avatar')->nullable();

@@ -14,13 +14,14 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        
+
     City::factory()->create([
         "id" => "01",
         "name" => "Hà Nội",
         "slug" => "ha-noi",
         "type" => "thanh-pho",
         "name_with_type" => "Thành phố Hà Nội",
+        "path_with_type" => "Thành phố Hà Nội",
     ]);
     City::factory()->create([
         "id" => "02",
@@ -28,6 +29,7 @@ class CitySeeder extends Seeder
         "slug" => "ha-giang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hà Giang",
+        "path_with_type" => "Tỉnh Hà Giang",
     ]);
     City::factory()->create([
         "id" => "04",
@@ -35,6 +37,7 @@ class CitySeeder extends Seeder
         "slug" => "cao-bang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Cao Bằng",
+        "path_with_type" => "Tỉnh Cao Bằng",
     ]);
     City::factory()->create([
         "id" => "06",
@@ -42,6 +45,7 @@ class CitySeeder extends Seeder
         "slug" => "bac-kan",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bắc Kạn",
+        "path_with_type" => "Tỉnh Bắc Kạn",
     ]);
     City::factory()->create([
         "id" => "08",
@@ -49,6 +53,7 @@ class CitySeeder extends Seeder
         "slug" => "tuyen-quang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Tuyên Quang",
+        "path_with_type" => "Tỉnh Tuyên Quang",
     ]);
     City::factory()->create([
         "id" => "10",
@@ -56,6 +61,7 @@ class CitySeeder extends Seeder
         "slug" => "lao-cai",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Lào Cai",
+        "path_with_type" => "Tỉnh Lào Cai",
     ]);
     City::factory()->create([
         "id" => "11",
@@ -63,6 +69,7 @@ class CitySeeder extends Seeder
         "slug" => "dien-bien",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Điện Biên",
+        "path_with_type" => "Tỉnh Điện Biên",
     ]);
     City::factory()->create([
         "id" => "12",
@@ -70,6 +77,7 @@ class CitySeeder extends Seeder
         "slug" => "lai-chau",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Lai Châu",
+        "path_with_type" => "Tỉnh Lai Châu",
     ]);
     City::factory()->create([
         "id" => "14",
@@ -77,6 +85,7 @@ class CitySeeder extends Seeder
         "slug" => "son-la",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Sơn La",
+        "path_with_type" => "Tỉnh Sơn La",
     ]);
     City::factory()->create([
         "id" => "15",
@@ -84,6 +93,7 @@ class CitySeeder extends Seeder
         "slug" => "yen-bai",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Yên Bái",
+        "path_with_type" => "Tỉnh Yên Bái",
     ]);
     City::factory()->create([
         "id" => "17",
@@ -91,6 +101,7 @@ class CitySeeder extends Seeder
         "slug" => "hoa-binh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hoà Bình",
+        "path_with_type" => "Tỉnh Hoà Bình",
     ]);
     City::factory()->create([
         "id" => "19",
@@ -98,6 +109,7 @@ class CitySeeder extends Seeder
         "slug" => "thai-nguyen",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Thái Nguyên",
+        "path_with_type" => "Tỉnh Thái Nguyên",
     ]);
     City::factory()->create([
         "id" => "20",
@@ -105,6 +117,7 @@ class CitySeeder extends Seeder
         "slug" => "lang-son",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Lạng Sơn",
+        "path_with_type" => "Tỉnh Lạng Sơn",
     ]);
     City::factory()->create([
         "id" => "22",
@@ -112,6 +125,7 @@ class CitySeeder extends Seeder
         "slug" => "quang-ninh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Quảng Ninh",
+        "path_with_type" => "Tỉnh Quảng Ninh",
     ]);
     City::factory()->create([
         "id" => "24",
@@ -119,6 +133,7 @@ class CitySeeder extends Seeder
         "slug" => "bac-giang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bắc Giang",
+        "path_with_type" => "Tỉnh Bắc Giang",
     ]);
     City::factory()->create([
         "id" => "25",
@@ -126,6 +141,7 @@ class CitySeeder extends Seeder
         "slug" => "phu-tho",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Phú Thọ",
+        "path_with_type" => "Tỉnh Phú Thọ",
     ]);
     City::factory()->create([
         "id" => "26",
@@ -133,6 +149,7 @@ class CitySeeder extends Seeder
         "slug" => "vinh-phuc",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Vĩnh Phúc",
+        "path_with_type" => "Tỉnh Vĩnh Phúc",
     ]);
     City::factory()->create([
         "id" => "27",
@@ -140,6 +157,7 @@ class CitySeeder extends Seeder
         "slug" => "bac-ninh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bắc Ninh",
+        "path_with_type" => "Tỉnh Bắc Ninh",
     ]);
     City::factory()->create([
         "id" => "30",
@@ -147,6 +165,7 @@ class CitySeeder extends Seeder
         "slug" => "hai-duong",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hải Dương",
+        "path_with_type" => "Tỉnh Hải Dương",
     ]);
     City::factory()->create([
         "id" => "31",
@@ -154,6 +173,7 @@ class CitySeeder extends Seeder
         "slug" => "hai-phong",
         "type" => "thanh-pho",
         "name_with_type" => "Thành phố Hải Phòng",
+        "path_with_type" => "Thành phố Hải Phòng",
     ]);
     City::factory()->create([
         "id" => "33",
@@ -161,6 +181,7 @@ class CitySeeder extends Seeder
         "slug" => "hung-yen",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hưng Yên",
+        "path_with_type" => "Tỉnh Hưng Yên",
     ]);
     City::factory()->create([
         "id" => "34",
@@ -168,6 +189,7 @@ class CitySeeder extends Seeder
         "slug" => "thai-binh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Thái Bình",
+        "path_with_type" => "Tỉnh Thái Bình",
     ]);
     City::factory()->create([
         "id" => "35",
@@ -175,6 +197,7 @@ class CitySeeder extends Seeder
         "slug" => "ha-nam",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hà Nam",
+        "path_with_type" => "Tỉnh Hà Nam",
     ]);
     City::factory()->create([
         "id" => "36",
@@ -182,6 +205,7 @@ class CitySeeder extends Seeder
         "slug" => "nam-dinh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Nam Định",
+        "path_with_type" => "Tỉnh Nam Định",
     ]);
     City::factory()->create([
         "id" => "37",
@@ -189,6 +213,7 @@ class CitySeeder extends Seeder
         "slug" => "ninh-binh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Ninh Bình",
+        "path_with_type" => "Tỉnh Ninh Bình",
     ]);
     City::factory()->create([
         "id" => "38",
@@ -196,6 +221,7 @@ class CitySeeder extends Seeder
         "slug" => "thanh-hoa",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Thanh Hóa",
+        "path_with_type" => "Tỉnh Thanh Hóa",
     ]);
     City::factory()->create([
         "id" => "40",
@@ -203,6 +229,7 @@ class CitySeeder extends Seeder
         "slug" => "nghe-an",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Nghệ An",
+        "path_with_type" => "Tỉnh Nghệ An",
     ]);
     City::factory()->create([
         "id" => "42",
@@ -210,6 +237,7 @@ class CitySeeder extends Seeder
         "slug" => "ha-tinh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hà Tĩnh",
+        "path_with_type" => "Tỉnh Hà Tĩnh",
     ]);
     City::factory()->create([
         "id" => "44",
@@ -217,6 +245,7 @@ class CitySeeder extends Seeder
         "slug" => "quang-binh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Quảng Bình",
+        "path_with_type" => "Tỉnh Quảng Bình",
     ]);
     City::factory()->create([
         "id" => "45",
@@ -224,6 +253,7 @@ class CitySeeder extends Seeder
         "slug" => "quang-tri",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Quảng Trị",
+        "path_with_type" => "Tỉnh Quảng Trị",
     ]);
     City::factory()->create([
         "id" => "46",
@@ -231,6 +261,7 @@ class CitySeeder extends Seeder
         "slug" => "thua-thien-hue",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Thừa Thiên Huế",
+        "path_with_type" => "Tỉnh Thừa Thiên Huế",
     ]);
     City::factory()->create([
         "id" => "48",
@@ -238,6 +269,7 @@ class CitySeeder extends Seeder
         "slug" => "da-nang",
         "type" => "thanh-pho",
         "name_with_type" => "Thành phố Đà Nẵng",
+        "path_with_type" => "Thành phố Đà Nẵng",
     ]);
     City::factory()->create([
         "id" => "49",
@@ -245,6 +277,7 @@ class CitySeeder extends Seeder
         "slug" => "quang-nam",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Quảng Nam",
+        "path_with_type" => "Tỉnh Quảng Nam",
     ]);
     City::factory()->create([
         "id" => "51",
@@ -252,6 +285,7 @@ class CitySeeder extends Seeder
         "slug" => "quang-ngai",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Quảng Ngãi",
+        "path_with_type" => "Tỉnh Quảng Ngãi",
     ]);
     City::factory()->create([
         "id" => "52",
@@ -259,6 +293,7 @@ class CitySeeder extends Seeder
         "slug" => "binh-dinh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bình Định",
+        "path_with_type" => "Tỉnh Bình Định",
     ]);
     City::factory()->create([
         "id" => "54",
@@ -266,6 +301,7 @@ class CitySeeder extends Seeder
         "slug" => "phu-yen",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Phú Yên",
+        "path_with_type" => "Tỉnh Phú Yên",
     ]);
     City::factory()->create([
         "id" => "56",
@@ -273,6 +309,7 @@ class CitySeeder extends Seeder
         "slug" => "khanh-hoa",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Khánh Hòa",
+        "path_with_type" => "Tỉnh Khánh Hòa",
     ]);
     City::factory()->create([
         "id" => "58",
@@ -280,6 +317,7 @@ class CitySeeder extends Seeder
         "slug" => "ninh-thuan",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Ninh Thuận",
+        "path_with_type" => "Tỉnh Ninh Thuận",
     ]);
     City::factory()->create([
         "id" => "60",
@@ -287,6 +325,7 @@ class CitySeeder extends Seeder
         "slug" => "binh-thuan",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bình Thuận",
+        "path_with_type" => "Tỉnh Bình Thuận",
     ]);
     City::factory()->create([
         "id" => "62",
@@ -294,6 +333,7 @@ class CitySeeder extends Seeder
         "slug" => "kon-tum",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Kon Tum",
+        "path_with_type" => "Tỉnh Kon Tum",
     ]);
     City::factory()->create([
         "id" => "64",
@@ -301,6 +341,7 @@ class CitySeeder extends Seeder
         "slug" => "gia-lai",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Gia Lai",
+        "path_with_type" => "Tỉnh Gia Lai",
     ]);
     City::factory()->create([
         "id" => "66",
@@ -308,6 +349,7 @@ class CitySeeder extends Seeder
         "slug" => "dak-lak",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Đắk Lắk",
+        "path_with_type" => "Tỉnh Đắk Lắk",
     ]);
     City::factory()->create([
         "id" => "67",
@@ -315,6 +357,7 @@ class CitySeeder extends Seeder
         "slug" => "dak-nong",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Đắk Nông",
+        "path_with_type" => "Tỉnh Đắk Nông",
     ]);
     City::factory()->create([
         "id" => "68",
@@ -322,6 +365,7 @@ class CitySeeder extends Seeder
         "slug" => "lam-dong",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Lâm Đồng",
+        "path_with_type" => "Tỉnh Lâm Đồng",
     ]);
     City::factory()->create([
         "id" => "70",
@@ -329,6 +373,7 @@ class CitySeeder extends Seeder
         "slug" => "binh-phuoc",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bình Phước",
+        "path_with_type" => "Tỉnh Bình Phước",
     ]);
     City::factory()->create([
         "id" => "72",
@@ -336,6 +381,7 @@ class CitySeeder extends Seeder
         "slug" => "tay-ninh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Tây Ninh",
+        "path_with_type" => "Tỉnh Tây Ninh",
     ]);
     City::factory()->create([
         "id" => "74",
@@ -343,6 +389,7 @@ class CitySeeder extends Seeder
         "slug" => "binh-duong",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bình Dương",
+        "path_with_type" => "Tỉnh Bình Dương",
     ]);
     City::factory()->create([
         "id" => "75",
@@ -350,6 +397,7 @@ class CitySeeder extends Seeder
         "slug" => "dong-nai",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Đồng Nai",
+        "path_with_type" => "Tỉnh Đồng Nai",
     ]);
     City::factory()->create([
         "id" => "77",
@@ -357,6 +405,7 @@ class CitySeeder extends Seeder
         "slug" => "ba-ria-vung-tau",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bà Rịa - Vũng Tàu",
+        "path_with_type" => "Tỉnh Bà Rịa - Vũng Tàu",
     ]);
     City::factory()->create([
         "id" => "79",
@@ -364,6 +413,7 @@ class CitySeeder extends Seeder
         "slug" => "ho-chi-minh",
         "type" => "thanh-pho",
         "name_with_type" => "Thành phố Hồ Chí Minh",
+        "path_with_type" => "Thành phố Hồ Chí Minh",
     ]);
     City::factory()->create([
         "id" => "80",
@@ -371,6 +421,7 @@ class CitySeeder extends Seeder
         "slug" => "long-an",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Long An",
+        "path_with_type" => "Tỉnh Long An",
     ]);
     City::factory()->create([
         "id" => "82",
@@ -378,6 +429,7 @@ class CitySeeder extends Seeder
         "slug" => "tien-giang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Tiền Giang",
+        "path_with_type" => "Tỉnh Tiền Giang",
     ]);
     City::factory()->create([
         "id" => "83",
@@ -385,6 +437,7 @@ class CitySeeder extends Seeder
         "slug" => "ben-tre",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bến Tre",
+        "path_with_type" => "Tỉnh Bến Tre",
     ]);
     City::factory()->create([
         "id" => "84",
@@ -392,6 +445,7 @@ class CitySeeder extends Seeder
         "slug" => "tra-vinh",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Trà Vinh",
+        "path_with_type" => "Tỉnh Trà Vinh",
     ]);
     City::factory()->create([
         "id" => "86",
@@ -399,6 +453,7 @@ class CitySeeder extends Seeder
         "slug" => "vinh-long",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Vĩnh Long",
+        "path_with_type" => "Tỉnh Vĩnh Long",
     ]);
     City::factory()->create([
         "id" => "87",
@@ -406,6 +461,7 @@ class CitySeeder extends Seeder
         "slug" => "dong-thap",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Đồng Tháp",
+        "path_with_type" => "Tỉnh Đồng Tháp",
     ]);
     City::factory()->create([
         "id" => "89",
@@ -413,6 +469,7 @@ class CitySeeder extends Seeder
         "slug" => "an-giang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh An Giang",
+        "path_with_type" => "Tỉnh An Giang",
     ]);
     City::factory()->create([
         "id" => "91",
@@ -420,6 +477,7 @@ class CitySeeder extends Seeder
         "slug" => "kien-giang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Kiên Giang",
+        "path_with_type" => "Tỉnh Kiên Giang",
     ]);
     City::factory()->create([
         "id" => "92",
@@ -427,6 +485,7 @@ class CitySeeder extends Seeder
         "slug" => "can-tho",
         "type" => "thanh-pho",
         "name_with_type" => "Thành phố Cần Thơ",
+        "path_with_type" => "Thành phố Cần Thơ",
     ]);
     City::factory()->create([
         "id" => "93",
@@ -434,6 +493,7 @@ class CitySeeder extends Seeder
         "slug" => "hau-giang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Hậu Giang",
+        "path_with_type" => "Tỉnh Hậu Giang",
     ]);
     City::factory()->create([
         "id" => "94",
@@ -441,6 +501,7 @@ class CitySeeder extends Seeder
         "slug" => "soc-trang",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Sóc Trăng",
+        "path_with_type" => "Tỉnh Sóc Trăng",
     ]);
     City::factory()->create([
         "id" => "95",
@@ -448,6 +509,7 @@ class CitySeeder extends Seeder
         "slug" => "bac-lieu",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Bạc Liêu",
+        "path_with_type" => "Tỉnh Bạc Liêu",
     ]);
     City::factory()->create([
         "id" => "96",
@@ -455,6 +517,7 @@ class CitySeeder extends Seeder
         "slug" => "ca-mau",
         "type" => "tinh",
         "name_with_type" => "Tỉnh Cà Mau",
+        "path_with_type" => "Tỉnh Cà Mau",
     ]);
 
     }

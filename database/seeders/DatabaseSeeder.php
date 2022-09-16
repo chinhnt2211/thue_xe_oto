@@ -25,12 +25,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        $this->call([
-//            CitySeeder::class,
-//            DistrictSeeder::class,
-//            SubdistrictSeeder::class,
-//        ]);
-        Location::factory(100)->create();
+        $this->call(array(
+            CitySeeder::class,
+            DistrictSeeder::class,
+            WardSeeder::class,
+        ));
 //        Station::factory(10)->create();
 //        Image::factory(200)->create();
 //        Admin::factory(10)->create();
@@ -87,9 +86,9 @@ class DatabaseSeeder extends Seeder
 //            'status' => 0,
 //        ]);
 //        Brand::factory(10)->create();
-//        SeatingCapacity::factory()->create([ 'seating_capacity'=> 4 ]);
-//        SeatingCapacity::factory()->create([ 'seating_capacity'=> 5 ]);
-//        SeatingCapacity::factory()->create([ 'seating_capacity'=> 7 ]);
+//        SeatingCapacityController::factory()->create([ 'seating_capacity'=> 4 ]);
+//        SeatingCapacityController::factory()->create([ 'seating_capacity'=> 5 ]);
+//        SeatingCapacityController::factory()->create([ 'seating_capacity'=> 7 ]);
 //
 //        Vehicle::factory(100)->create();
 //

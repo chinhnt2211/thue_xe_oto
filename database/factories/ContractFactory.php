@@ -3,6 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Image;
+use App\Models\Admin;
+use App\Models\Vehicle;
+use App\Models\Ward;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,7 +20,7 @@ class ContractFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    
+
     {
         $user_id = $this->faker->randomElement(\App\Models\User::get()->pluck('id'));
         $admin_id = $this->faker->randomElement(\App\Models\Admin::where('role', '<>', '0')->pluck('id'));
@@ -29,6 +33,13 @@ class ContractFactory extends Factory
             'user_id' => $user_id,
             'admin_id' => $admin_id,
             'vehicle_id' => $vehicle_id,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'cic_number' => $this->faker->regexify('0[0-9]{11}'),
+            'cic_front' => $this->faker->unique()->randomElement(Image::query()->where('type', '=', 1)->get('id')),
+            'cic_back' => $this->faker->unique()->randomElement(Image::query()->where('type', '=', 2)->get('id')),
+            'address_line_2' => $this->faker->unique()->randomElement(Ward::query()->get('id')),
+            'address_line_1' => $this->faker->streetAddress(),
             'status' => $this->faker->randomElement([0, 1, 2, 3]),
             'contract_image' => $contract_image,
             'price' => \App\Models\Vehicle::where('id', '=', $vehicle_id)->first()->price,
