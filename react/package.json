@@ -8,16 +8,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
     "classnames": "^2.3.1",
     "clsx": "^1.2.1",
     "flowbite": "^1.5.2",
     "flowbite-react": "^0.1.6",
+    "hanhchinhvn": "^1.4.0",
+    "json-loader": "^0.5.7",
     "normalize.css": "^8.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
-    "sass": "^1.54.4"
+    "sass": "^1.54.4",
+    "styled-components": "^5.3.5",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
