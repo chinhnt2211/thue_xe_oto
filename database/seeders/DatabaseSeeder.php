@@ -25,12 +25,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(array(
-            CitySeeder::class,
-            DistrictSeeder::class,
-            WardSeeder::class,
-        ));
-//        Station::factory(10)->create();
+
+//        StationResource::factory(10)->create();
 //        Image::factory(200)->create();
 //        Admin::factory(10)->create();
 ////        Tao admin

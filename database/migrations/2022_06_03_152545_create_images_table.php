@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('type');
+            $table->string('imageable_id');
+            $table->tinyInteger('imageable_type');
             $table->string('link',300);
+            $table->tinyInteger('type');
             $table->timestamps();
         });
     }

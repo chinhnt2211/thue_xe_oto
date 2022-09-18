@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vehicle_images', function (Blueprint $table) {
-            $table->foreignId('vehicle_id')->constrained();
-            $table->foreignId('image_id')->constrained();
+        Schema::create('locations', function (Blueprint $table) {
+            $table->id();
+            $table->string('locatable_id');
+            $table->string('locatable_type');
+            $table->string('city');
+            $table->string('district');
+            $table->string('ward');
+            $table->string('address');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicle_images');
+        Schema::dropIfExists('locations');
     }
 };

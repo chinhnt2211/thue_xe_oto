@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('status');
+            $table->integer('seating_capacity');
             $table->text('description');
             $table->string('license_number',15);
             $table->unsignedInteger('price');
@@ -24,7 +25,6 @@ return new class extends Migration
             $table->unsignedInteger('fine');
             $table->foreignId('station_id')->constrained();
             $table->foreignId('brand_id')->constrained();
-            $table->foreignId('seating_capacity_id')->constrained();
             $table->timestamps();
         });
     }
