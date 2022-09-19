@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Bill;
-use App\Models\User;
+use App\Models\Admin;
 use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Image;

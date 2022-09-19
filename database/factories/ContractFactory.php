@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Admin;
 use App\Models\Image;
 use App\Models\Admin;
 use App\Models\Vehicle;
@@ -22,7 +22,7 @@ class ContractFactory extends Factory
     public function definition()
 
     {
-        $user_id = $this->faker->randomElement(\App\Models\User::get()->pluck('id'));
+        $user_id = $this->faker->randomElement(\App\Models\Admin::get()->pluck('id'));
         $admin_id = $this->faker->randomElement(\App\Models\Admin::where('role', '<>', '0')->pluck('id'));
         $vehicle_id = $this->faker->randomElement(\App\Models\Vehicle::get()->pluck('id'));
         $contract_image = $this->faker->randomElement(\App\Models\Image::where('type', '=', 1)->get()->pluck('id'));

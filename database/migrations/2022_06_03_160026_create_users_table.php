@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -23,10 +22,9 @@ return new class extends Migration
             $table->string('password');
             $table->date('dob');
             $table->tinyInteger('gender');
-            $table->unsignedBigInteger('avatar')->nullable();
-            $table->foreign('avatar')->references('id')->on('images');
             $table->tinyInteger('status');
             $table->rememberToken();
+            $table->timestamps();
         });
     }
 
