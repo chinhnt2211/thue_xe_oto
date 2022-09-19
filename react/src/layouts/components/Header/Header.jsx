@@ -1,5 +1,5 @@
 import config from '@/config';
-import { Navbar, Dropdown, Avatar } from 'flowbite-react';
+import { Navbar, Dropdown, Avatar, Button } from 'flowbite-react';
 import { useLinkClickHandler, useLocation } from 'react-router-dom';
 
 function Header() {
@@ -12,7 +12,7 @@ function Header() {
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Thue Oto</span>
             </Navbar.Brand>
             <div className="flex md:order-2">
-                <Dropdown
+                {/* <Dropdown
                     arrowIcon={false}
                     inline={true}
                     label={
@@ -27,12 +27,13 @@ function Header() {
                         <span className="block text-sm">Bonnie Green</span>
                         <span className="block truncate text-sm font-medium">name@flowbite.com</span>
                     </Dropdown.Header>
-                    <Dropdown.Item>Dashboard</Dropdown.Item>
-                    <Dropdown.Item>Settings</Dropdown.Item>
-                    <Dropdown.Item>Earnings</Dropdown.Item>
+                    <Dropdown.Item onClick={LinkClickHandler(config.routes.user.profile)}>Hồ sơ</Dropdown.Item>
+                    <Dropdown.Item>Lịch sử thuê</Dropdown.Item>
+                    <Dropdown.Item>Hóa đơn</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
+                    <Dropdown.Item>Đăng xuất</Dropdown.Item>
+                </Dropdown> */}
+                <Button>Get started</Button>
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
@@ -49,13 +50,6 @@ function Header() {
                     onClick={LinkClickHandler(config.routes.search)}
                 >
                     Tìm kiếm
-                </Navbar.Link>
-                <Navbar.Link
-                    href={config.routes.stations}
-                    active={location.pathname === config.routes.stations}
-                    onClick={LinkClickHandler(config.routes.stations)}
-                >
-                    Trạm xe
                 </Navbar.Link>
             </Navbar.Collapse>
         </Navbar>

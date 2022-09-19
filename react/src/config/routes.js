@@ -1,11 +1,13 @@
 const routes = {
     home: '/',
     search: '/search',
-    stations: '/stations',
     // AuthUser
     auth: {
         signIn: '/sign-in',
         signUp: '/sign-up',
+    },
+    user: {
+        profile: '/profile',
     }
 };
 

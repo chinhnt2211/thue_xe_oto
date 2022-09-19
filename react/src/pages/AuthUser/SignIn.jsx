@@ -11,7 +11,7 @@ function SignIn() {
             >
                 <div className="relative container m-auto px-6 text-gray-500 md:px-12 lg:px-40 max-w-[1280px]">
                     <div className="m-auto space-y-8 md:w-8/12 lg:w-full">
-                        <div className="rounded-xl bg-opacity-50 backdrop-blur-2xl bg-white shadow-xl">
+                        <div className="rounded-xl backdrop-blur-2xl bg-white shadow-xl">
                             <div className="lg:grid lg:grid-cols-2">
                                 <div className="p-8 sm:p-14">
                                     <h2 className="mb-8 text-3xl text-cyan-900 font-bold">Đăng nhập </h2>
@@ -22,7 +22,7 @@ function SignIn() {
                                                     id=""
                                                     type="email"
                                                     placeholder="Email"
-                                                    className="w-full bg-transparent pb-3 border-0 border-b shadow-none border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
+                                                    className="w-full bg-transparent pb-3 border-0 border-b shadow-none border-gray-500 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
                                                 />
                                             </div>
                                             <p className="h-[45px] p-[10px] pt-[5px] italic text-red-600 text-sm">
@@ -35,7 +35,7 @@ function SignIn() {
                                                     id=""
                                                     type="password"
                                                     placeholder="Mật khẩu"
-                                                    className="w-full bg-transparent pb-3   border-0 border-b shadow-none border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
+                                                    className="w-full bg-transparent pb-3   border-0 border-b shadow-none border-gray-500 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
                                                 />
                                             </div>
                                             <p className="h-[45px] p-[10px] pt-[5px] italic text-red-600 text-sm">

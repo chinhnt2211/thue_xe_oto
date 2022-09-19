@@ -4,6 +4,7 @@ import { AuthUserLayout } from '@/layouts';
 
 import Home from '@/pages/Home';
 import Search from '@/pages/Search';
+import { Profile } from '@/pages/User';
 // AuthUser
 import { SignIn, SignUp } from '@/pages/AuthUser';
 
@@ -17,10 +18,6 @@ const publicRoutes = [
         path: config.routes.search,
         component: Search,
     },
-    {
-        path: config.routes.stations,
-        component: Search,
-    },
     // AuthUser
     {
         path: config.routes.auth.signIn,
@@ -31,6 +28,10 @@ const publicRoutes = [
         path: config.routes.auth.signUp,
         component: SignUp,
         layout: AuthUserLayout,
+    },
+    {
+        path: config.routes.user.profile,
+        component: Profile,
     },
 ]
 
