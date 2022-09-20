@@ -1,22 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\V1\Admin\GetUserController;
-use App\Http\Controllers\Auth\V1\Admin\LoginController;
-use App\Http\Controllers\Auth\V1\Admin\LogoutController;
-use App\Http\Controllers\Auth\V1\Admin\RegisterController;
+use App\Http\Controllers\Auth\V1\Admin\AdminAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('admins.')
-    ->middleware('auth:sanctum')
+    ->middleware(['auth:sanctum', 'role.admin'])
     ->prefix('admin')
     ->group(function () {
-        Route::post('/register', [RegisterController::class, 'register'])->name('register');
-        Route::post('/login', [LoginController::class, 'login'])
-            ->withoutMiddleware('auth:sanctum')
+        Route::post('/login', [AdminAuthController::class, 'login'])
+            ->withoutMiddleware(['auth:sanctum', 'role.admin'])
             ->name('login');
-        Route::post('/logout', [LogoutController::class, 'logout'])
+        Route::post('/logout', [AdminAuthController::class, 'logout'])
             ->name('logout');
-        Route::post('/get-user', [GetUserController::class, 'getInfo'])
+        Route::post('/get-user', [AdminAuthController::class, 'getInfo'])
             ->name('getUser');
-
     });

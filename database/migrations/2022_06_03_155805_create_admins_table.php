@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('cic_number',12);
             $table->date('dob');
-            $table->tinyInteger('gender');
-            $table->tinyInteger('role');
-            $table->tinyInteger('status');
+            $table->tinyInteger('gender')->comment("GenderEnum")->default(0);
+            $table->tinyInteger('role')->comment("RoleEnum");
+            $table->tinyInteger('status')->comment("RoleEnum")->index();
             $table->foreignId('station_id')->constrained();
             $table->timestamps();
         });

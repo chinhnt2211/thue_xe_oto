@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('phone',15);
+            $table->string('phone',15)->nullable();
             $table->string('password');
-            $table->date('dob');
-            $table->tinyInteger('gender');
-            $table->tinyInteger('status');
+            $table->date('dob')->nullable();
+            $table->tinyInteger('gender')->comment("GenderEnum")->default(0);
+            $table->tinyInteger('status')->comment("StatusEnum")->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
