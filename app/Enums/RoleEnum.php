@@ -14,6 +14,15 @@ final class RoleEnum extends Enum
     {
         return [
             'admin' => self::ADMIN,
+            'super_admin' => self::SUPER_ADMIN,
+            'user' => self::USER,
+        ];
+    }
+
+    public static function getAdminEnums(): array
+    {
+        return [
+            'admin' => self::ADMIN,
             'super_admin' => self::SUPER_ADMIN
         ];
     }
