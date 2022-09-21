@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
 
 //        StationResource::factory(10)->create();
 //        Image::factory(200)->create();
-//        Admin::factory(10)->create();
+//        Admins::factory(10)->create();
 ////        Tao admin
-//        Admin::factory()->create([
+//        Admins::factory()->create([
 //            'first_name' => "Van A",
 //            'last_name' => "Nguyen ",
 //            'email' => 'admin@example.com',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
 //            'station_id' => 1
 //        ]);
 ////        Tao superAdmin
-//        Admin::factory()->create([
+//        Admins::factory()->create([
 //            'first_name' => "Van B",
 //            'last_name' => "Nguyen ",
 //            'email' => 'superadmin@example.com',

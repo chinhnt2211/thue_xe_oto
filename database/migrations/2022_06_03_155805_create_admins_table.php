@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('dob');
             $table->tinyInteger('gender')->comment("GenderEnum")->default(0);
             $table->tinyInteger('role')->comment("RoleEnum");
-            $table->tinyInteger('status')->comment("RoleEnum")->index();
+            $table->tinyInteger('status')->comment("RoleEnum")->default(0)->index();
             $table->foreignId('station_id')->constrained();
             $table->timestamps();
         });
