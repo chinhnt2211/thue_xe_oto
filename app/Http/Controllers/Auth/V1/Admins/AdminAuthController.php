@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth\V1\Admin;
+namespace App\Http\Controllers\Auth\V1\Admins;
 
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Auth\Admin\LoginRequest;
+use App\Http\Requests\V1\Auth\Admins\LoginRequest;
 use App\Http\Resources\V1\AdminResource;
 use App\Models\Admin;
 use Illuminate\Http\JsonResponse;
@@ -26,7 +26,7 @@ class AdminAuthController extends Controller
         } else {
             $token = $admin->createToken('token', ['role:'.RoleEnum::ADMIN])->plainTextToken;
         }
-
+        $admin = $admin->loadMissing(['location', 'station']);
         return response()->json([
             'status' => true,
             'message' => 'Login successfully',

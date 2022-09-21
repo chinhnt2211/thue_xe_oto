@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\V1\Admin\AdminAuthController;
+use App\Http\Controllers\Auth\V1\Admins\AdminAuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('admins.')
+Route::name('auth.admins.')
     ->middleware(['auth:sanctum', 'role.admin'])
     ->prefix('admin')
     ->group(function () {

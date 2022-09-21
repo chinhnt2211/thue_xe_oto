@@ -2,7 +2,10 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Enums\ImageEnum;
+use App\Enums\RoleEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
+
 
 class AdminResource extends JsonResource
 {
@@ -15,11 +18,21 @@ class AdminResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'cic_number' => $this->cic_number,
+            'avatar' => $this->getImageLinkByType(ImageEnum::AVATAR),
+            $this->mergeWhen(auth()->check() && auth()->user()->role == RoleEnum::SUPER_ADMIN, [
+                'cic' => [
+                    'cic_number' => $this->cic_number,
+                    'cic_front' => $this->getImageLinkByType(ImageEnum::CIC_FRONT),
+                    'cic_back' => $this->getImageLinkByType(ImageEnum::CIC_BACK),
+                ],
+                'location' => new LocationResource($this->whenLoaded('location')),
+            ]),
+            'station' => new StationResource($this->whenLoaded('station')),
             'dob' => $this->dob,
             'gender' => $this->gender,
             'role' => $this->role,

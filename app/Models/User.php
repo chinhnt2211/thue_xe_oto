@@ -50,6 +50,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\Location|null $location
  */
 class User extends Authenticatable
 {
@@ -89,4 +92,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function location(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Location::class, 'locatable');
+    }
 }

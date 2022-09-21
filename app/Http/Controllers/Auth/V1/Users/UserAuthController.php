@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth\V1\User;
+namespace App\Http\Controllers\Auth\V1\Users;
 
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Auth\User\RegisterRequest;
-use App\Http\Requests\V1\Auth\User\LoginRequest;
+use App\Http\Requests\V1\Auth\Users\LogoutRequest;
+use App\Http\Requests\V1\Auth\Users\RegisterRequest;
+use App\Http\Requests\V1\Auth\Users\LoginRequest;
 use App\Http\Resources\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -41,7 +42,7 @@ class UserAuthController extends Controller
     {
         $user = User::create(array_merge(
                 $request->safe()->except('password'),
-                ['password' => bcrypt($request->safe()->password)]
+                ['password' => bcrypt($request->validated('password'))]
             )
         );
         $token = $user->createToken('token', ['role:'.RoleEnum::USER])->plainTextToken;
@@ -51,7 +52,7 @@ class UserAuthController extends Controller
             'data' => UserResource::make($user),
             'access_token' => $token,
             'type_token' => 'Bearer'
-        ],201);
+        ], 201);
     }
 
     /**
@@ -69,9 +70,13 @@ class UserAuthController extends Controller
     /**
      * @return JsonResponse
      */
-    public function logout(): JsonResponse
+    public function logout(LogoutRequest $request): JsonResponse
     {
-        auth()->user()->currentAccessToken()->delete();
+        if ($request->has('options') && $request->get('options') === 'all') {
+            auth()->user()->tokens()->delete();
+        } else {
+            auth()->user()->currentAccessToken()->delete();
+        }
         return response()->json([
             'status' => true,
             'message' => 'Logout successfully',

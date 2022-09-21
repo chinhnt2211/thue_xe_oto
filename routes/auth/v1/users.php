@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\V1\User\UserAuthController;
+use App\Http\Controllers\Auth\V1\Users\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('users.')
+Route::name('auth.users.')
     ->middleware(['auth:sanctum', 'role.user'])
     ->prefix('user')
     ->group(function () {

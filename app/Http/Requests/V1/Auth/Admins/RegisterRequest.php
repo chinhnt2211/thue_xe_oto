@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\V1\Auth\User;
+namespace App\Http\Requests\V1\Auth\Admins;
 
 use App\Enums\RoleEnum;
 use App\Enums\AdminStatusEnum;
@@ -31,11 +31,13 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'string', 'email'],
-            'phone' => ['string'],
+            'phone' => ['required', 'string'],
             'password' => ['required', 'string'],
-            'dob' => ['date'],
-            'gender' => ['integer', Rule::in(GenderEnum::getAllEnums())],
-            'status' => ['integer', Rule::in(AdminStatusEnum::getAllEnums())],
+            'cic_number' => ['required', 'string'],
+            'dob' => ['required', 'date'],
+            'gender' => ['required', 'integer', Rule::in(GenderEnum::getAllEnums())],
+            'role' => ['required', 'integer', Rule::in(RoleEnum::getAllEnums())],
+            'status' => ['required', 'integer', Rule::in(AdminStatusEnum::getAllEnums())],
         ];
     }
 }
