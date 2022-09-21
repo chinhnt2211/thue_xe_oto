@@ -61,14 +61,17 @@ class Admin extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'first_name',
         'last_name',
         'email',
         'phone',
         'password',
+        'cic_number',
         'dob',
         'gender',
-        'status'
+        'status',
+        'station_id'
     ];
 
     /**
@@ -80,12 +83,67 @@ class Admin extends Authenticatable
         'password',
     ];
 
-//    /**
-//     * The attributes that should be cast.
-//     *
-//     * @var array<string, string>
-//     */
-//    protected $casts = [
-//        'email_verified_at' => 'datetime',
-//    ];
+
+    public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function location(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Location::class, 'locatable');
+    }
+
+    public function station(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Station::class, 'station_id');
+    }
+
+    /**
+     * @param $type
+     * @return mixed|null
+     */
+    public function getImageLinkByType($type): mixed
+    {
+        return $this->images()->where('type', '=', $type)->value('link');
+    }
+
+    public function scopeFilterByLocation($query, $filters)
+    {
+        return $query
+            ->whereHas('location', function ($q) use ($filters) {
+                $q
+                    ->when(isset($filters['city']), function ($q) use ($filters) {
+                        $q->where('city', 'like', "%{$filters['city']}%");
+                    })
+                    ->when(isset($filters['district']), function ($q) use ($filters) {
+                        $q->where('district', 'like', "%{$filters['district']}%");
+                    })
+                    ->when(isset($filters['ward']), function ($q) use ($filters) {
+                        $q->where('ward', 'like', "%{$filters['ward']}%");
+                    });
+            });
+    }
+
+
+    public function scopeFilter($query, $filters)
+    {
+        return $query
+            ->when(isset($filters['first_name']), function ($q) use ($filters) {
+                $q->where('first_name', 'like', "%{$filters['first_name']}%");
+            })
+            ->when(isset($filters['last_name']), function ($q) use ($filters) {
+                $q->where('last_name', 'like', "%{$filters['last_name']}%");
+            })
+            ->when(isset($filters['email']), function ($q) use ($filters) {
+                $q->where('email', 'like', "%{$filters['email']}%");
+            })
+            ->when(isset($filters['cic_number']), function ($q) use ($filters) {
+                $q->where('cic_number', 'like', "%{$filters['cic_number']}%");
+            })
+            ->when(isset($filters['role']), function ($q) use ($filters) {
+                $q->where('role', '=', $filters['role']);
+            });
+
+    }
 }
