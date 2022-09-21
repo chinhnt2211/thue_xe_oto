@@ -33,8 +33,7 @@ class StationController extends Controller
         $stations = Station::filter($request->all());
 
         if ($request->has('location')) {
-            $location = $request->get('location');
-            $stations = $stations->filterByLocation($location);
+            $stations = $stations->filterByLocation($request->validated('location'));
         }
 
         if (in_array('location', $request->get('include'), true)) {
@@ -71,9 +70,8 @@ class StationController extends Controller
 
     public function show(ShowRequest $request, Station $station): JsonResponse
     {
-        $include = explode(",", $request->get('include'));
         $result = $station;
-        if (in_array('location', $include, true)) {
+        if (in_array('location', $request->get('include'), true)) {
             $result = $station->loadMissing('location');
         }
         return response()->json([
@@ -93,8 +91,7 @@ class StationController extends Controller
         $with = explode(",", $request->get('with'));
         $station = Station::create($request->safe()->only(['name', 'phone', 'capacity']));
         if (in_array('location', $with, true)) {
-            $location = $request->safe()->only(['location']);
-            $station->location()->create($location['location']);
+            $station->location()->create($request->validated('location'));
         }
 
         return response()->json([

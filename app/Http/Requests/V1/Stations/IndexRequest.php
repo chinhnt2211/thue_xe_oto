@@ -29,9 +29,6 @@ class IndexRequest extends FormRequest
             'max_capacity' => ['integer'],
             'include' => ['array'],
             'location' => ['array'],
-            'city' => ['string'],
-            'district' => ['string'],
-            'ward' => ['string'],
         ];
     }
 

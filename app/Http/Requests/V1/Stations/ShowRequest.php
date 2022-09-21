@@ -27,4 +27,11 @@ class ShowRequest extends FormRequest
             'include' => ['string']
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'include' => explode(",", $this->include),
+        ]);
+    }
 }
