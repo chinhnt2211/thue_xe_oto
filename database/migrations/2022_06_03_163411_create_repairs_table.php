@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('admin_id')->constrained();
             $table->foreignId('vehicle_id')->constrained();
-            $table->unsignedInteger('fee');
+            $table->unsignedInteger('fee')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->text('description');

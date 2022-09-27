@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')
+                ->default(\App\Enums\VehicleStatusEnum::FREE);
             $table->integer('seating_capacity');
             $table->text('description');
             $table->string('license_number',15);
