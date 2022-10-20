@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth\V1\Admins;
 
+use App\Enums\ImageEnum;
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Auth\Admins\LoginRequest;
@@ -21,16 +22,18 @@ class AdminAuthController extends Controller
     {
         $request->authenticate();
         $admin = Admin::where('email', $request->safe()->email)->first();
+        $admin->tokens()->delete();
         if ($admin->role === 0) {
             $token = $admin->createToken('token', ['role:'.RoleEnum::SUPER_ADMIN])->plainTextToken;
         } else {
             $token = $admin->createToken('token', ['role:'.RoleEnum::ADMIN])->plainTextToken;
         }
-        $admin = $admin->loadMissing(['location', 'station']);
+        $avatar = $admin->images()->where('type', '=', ImageEnum::AVATAR)->value('link');
         return response()->json([
             'status' => true,
-            'message' => 'Login successfully',
+            'message' => 'Successfully logged',
             'data' => AdminResource::make($admin),
+            'avatar' => $avatar,
             'access_token' => $token,
             'type_token' => 'Bearer'
         ], 200);
