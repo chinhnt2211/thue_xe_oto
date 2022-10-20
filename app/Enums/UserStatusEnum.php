@@ -9,7 +9,10 @@ final class UserStatusEnum extends Enum
     public const FORBIDDEN = 0;
     public const ACTIVE = 1;
 
-    public static function getAllEnums()
+    /**
+     * @return array
+     */
+    public static function getAllEnums(): array
     {
         return [
             'forbidden' => self::FORBIDDEN,
