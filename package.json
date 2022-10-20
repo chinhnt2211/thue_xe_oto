@@ -10,5 +10,10 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^1.8.6",
+        "react-redux": "^8.0.4",
+        "redux": "^4.2.0"
     }
 }
