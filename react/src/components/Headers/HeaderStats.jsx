@@ -59,7 +59,6 @@ export default function HeaderStats() {
                 options,
             );
 
-            console.log(result.data);
 
             let totalPay = 0;
             let totalRefund = 0;
@@ -80,6 +79,7 @@ export default function HeaderStats() {
                     totalRefundLastMonth += value.total;
                 }
             });
+
 
             setRevenue(totalPay - totalRefund);
             setLastMonthRevenue(totalPayLastMonth - totalRefundLastMonth);
