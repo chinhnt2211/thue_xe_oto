@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Location
+ * App\Models\Locations
  *
  * @property int $id
  * @property string $locatable_id

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $imageable_id
  * @property int $imageable_type
  * @property string $link
+ * @property string $name
  * @property int $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Image whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Image whereName($value)
  */
 class Image extends Model
 {
@@ -37,6 +39,7 @@ class Image extends Model
         'id',
         'imageable_id',
         'imageable_type',
+        'name',
         'link',
         'type',
     ];

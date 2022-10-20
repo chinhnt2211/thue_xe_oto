@@ -53,6 +53,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
  * @property-read \App\Models\Location|null $location
+ * @method static \Illuminate\Database\Eloquent\Builder|User filter($filters)
+ * @method static \Illuminate\Database\Eloquent\Builder|User filterByLocation($filters)
  */
 class User extends Authenticatable
 {
@@ -101,5 +103,46 @@ class User extends Authenticatable
     public function location(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Location::class, 'locatable');
+    }
+
+    /**
+     * @param $type
+     * @return mixed|null
+     */
+    public function getImageLinkByType($type): mixed
+    {
+        return $this->images()->where('type', '=', $type)->value('link');
+    }
+
+    public function scopeFilterByLocation($query, $filters)
+    {
+        return $query
+            ->whereHas('location', function ($q) use ($filters) {
+                $q
+                    ->when(isset($filters['city']), function ($q) use ($filters) {
+                        $q->where('city', 'like', "%{$filters['city']}%");
+                    })
+                    ->when(isset($filters['district']), function ($q) use ($filters) {
+                        $q->where('district', 'like', "%{$filters['district']}%");
+                    })
+                    ->when(isset($filters['ward']), function ($q) use ($filters) {
+                        $q->where('ward', 'like', "%{$filters['ward']}%");
+                    });
+            });
+    }
+
+
+    public function scopeFilter($query, $filters)
+    {
+        return $query
+            ->when(isset($filters['first_name']), function ($q) use ($filters) {
+                $q->where('first_name', 'like', "%{$filters['first_name']}%");
+            })
+            ->when(isset($filters['last_name']), function ($q) use ($filters) {
+                $q->where('last_name', 'like', "%{$filters['last_name']}%");
+            })
+            ->when(isset($filters['email']), function ($q) use ($filters) {
+                $q->where('email', 'like', "%{$filters['email']}%");
+            });
     }
 }

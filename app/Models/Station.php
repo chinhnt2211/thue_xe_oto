@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -62,6 +63,7 @@ class Station extends Model
                         $q->where('ward', 'like', "%{$filters['ward']}%");
                     });
             });
+
     }
 
 
