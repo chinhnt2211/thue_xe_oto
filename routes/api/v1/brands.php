@@ -12,7 +12,10 @@ Route::name('brands.')
         Route::get('/brands/{brand}', [BrandController::class, 'show'])
             ->withoutMiddleware(['auth:sanctum', 'role.admin'])
             ->name('show');
-        Route::post('/brands', [BrandController::class, 'store'])->name('store');
-        Route::match(['put', 'patch'], '/brands/{brand}', [BrandController::class, 'update'])->name('update');
-        Route::delete('/brands/{brand}', [BrandController::class, 'destroy'])->name('destroy');
+        Route::post('/brands', [BrandController::class, 'store'])
+            ->name('store');
+        Route::match(['put', 'patch'], '/brands/{brand}', [BrandController::class, 'update'])
+            ->name('update');
+        Route::delete('/brands/{brand}', [BrandController::class, 'destroy'])
+            ->name('destroy');
     });

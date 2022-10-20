@@ -17,10 +17,12 @@ Route::name('stations.')
         Route::match(['put', 'patch'], '/stations/{station}', [StationController::class, 'update'])->name('update');
         Route::delete('/stations/{station}', [StationController::class, 'destroy'])->name('destroy');
 
+        /*Location's Station */
         Route::get('/stations/{station}/location', [LocationStationController::class, 'show'])
             ->withoutMiddleware(['auth:sanctum', 'role.admin'])
             ->name('locations.show');
-        Route::post('/stations/{station}/location', [LocationStationController::class, 'store'])->name('locations.store');
-        Route::match(['put', 'patch'], '/stations/{station}/location', [LocationStationController::class, 'update'])->name('locations.update');
-        Route::delete('/stations/{station}/location', [LocationStationController::class, 'destroy'])->name('locations.destroy');
+        Route::post('/stations/{station}/location',
+            [LocationStationController::class, 'store'])->name('locations.store');
+        Route::match(['put', 'patch'], '/stations/{station}/location',
+            [LocationStationController::class, 'update'])->name('locations.update');
     });

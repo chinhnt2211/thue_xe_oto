@@ -1,1 +1,3 @@
-export { default as useDebounce } from './useDebounce';
+import useDebounce from './useDebounce';
+
+export { useDebounce };
