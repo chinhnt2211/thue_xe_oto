@@ -6,8 +6,7 @@ use App\Enums\ImageEnum;
 use App\Enums\RoleEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
-class AdminResource extends JsonResource
+class VehicleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,14 +18,14 @@ class AdminResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'full_name' => $this->full_name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'cic_number' => $this->cic_number,
-            'dob' => $this->dob,
-            'gender' => $this->gender,
-            'role' => $this->role,
-            'status' => $this->status,
+            'name' => $this->name,
+            'seating_capacity' => $this->seating_capacity,
+            'description' => $this->description,
+            'license_number' => $this->license_number,
+            'price' => $this->price,
+            'rent_price' => $this->rent_price,
+            'fine' => $this->fine,
+            'brand' => new BrandResource($this->brand),
             'station' => new StationResource($this->station),
         ];
     }

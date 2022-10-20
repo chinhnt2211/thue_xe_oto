@@ -2,12 +2,9 @@
 
 namespace App\Http\Resources\V1;
 
-use App\Enums\ImageEnum;
-use App\Enums\RoleEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
-class AdminResource extends JsonResource
+class ContractResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,15 +16,19 @@ class AdminResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'admin_id' => $this->admin_id,
+            'vehicle_id' => $this->vehicle_id,
             'full_name' => $this->full_name,
-            'email' => $this->email,
             'phone' => $this->phone,
+            'email' => $this->email,
             'cic_number' => $this->cic_number,
-            'dob' => $this->dob,
-            'gender' => $this->gender,
-            'role' => $this->role,
             'status' => $this->status,
-            'station' => new StationResource($this->station),
+            'price' => $this->price,
+            'paid' => $this->paid,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests\V1\Admins;
+namespace App\Http\Requests\V1\Repairs;
 
+use App\Enums\RepairEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ShowRequest extends FormRequest
+class CompleteRepairRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +26,8 @@ class ShowRequest extends FormRequest
     public function rules()
     {
         return [
-            'include' => ['array']
+            'fee' => ['required','integer'],
         ];
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'include' => explode(",", $this->include),
-        ]);
-    }
 }

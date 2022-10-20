@@ -16,7 +16,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -27,20 +27,15 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
+            'full_name' => ['required', 'string'],
             'email' => ['required', 'string', 'email'],
             'phone' => ['required', 'string'],
             'password' => ['required', 'string'],
             'cic_number' => ['required', 'string'],
-            'cic_front' => ['required', 'string'],
-            'cic_back' => ['required', 'string'],
-            'avatar' => ['required', 'string'],
             'dob' => ['required', 'date'],
             'gender' => ['required', 'integer', Rule::in(GenderEnum::getAllEnums())],
             'role' => ['required', 'integer', Rule::in(RoleEnum::getAdminEnums())],
-            'location' => ['required', 'array'],
-            'station_id' => ['required', 'integer']
+            'station_id' => ['integer']
         ];
     }
 }
