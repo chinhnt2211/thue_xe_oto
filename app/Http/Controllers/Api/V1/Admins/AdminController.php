@@ -10,9 +10,7 @@ use App\Http\Requests\V1\Admins\ShowRequest;
 use App\Http\Requests\V1\Admins\StoreRequest;
 use App\Http\Requests\V1\Admins\UpdateRequest;
 use App\Http\Resources\V1\AdminResource;
-use App\Http\Resources\V1\StationResource;
 use App\Models\Admin;
-use App\Models\Station;
 use Illuminate\Http\JsonResponse;
 
 class AdminController extends Controller
@@ -41,13 +39,7 @@ class AdminController extends Controller
             $admins = $admins->filterByLocation($location);
         }
 
-        if (in_array('location', $request->get('include'), true)) {
-            $admins = $admins->with('location');
-        }
-        if (in_array('station', $request->get('include'), true)) {
-            $admins = $admins->with('station');
-        }
-        $admins = $admins->paginate(10);
+        $admins = $admins->orderBy('id', 'desc')->paginate(10);
         return response()->json([
             'state' => true,
             'message' => 'List of admins',
@@ -62,6 +54,7 @@ class AdminController extends Controller
                 'page' => [
                     'total' => $admins->total(),
                     'count' => $admins->count(),
+                    'per_page' => $admins->perPage(),
                     'current_page' => $admins->currentPage(),
                     'last_page' => $admins->lastPage(),
                 ]
@@ -71,26 +64,17 @@ class AdminController extends Controller
 
 
     /**
-     * @param  ShowRequest  $request
      * @param  Admin  $admin
      * @return JsonResponse
      */
 
-    public function show(ShowRequest $request, Admin $admin): JsonResponse
+    public function show(Admin $admin): JsonResponse
     {
-        $result = $admin;
-        if (in_array('location', $request->get('include'), true)) {
-            $result = $admin->loadMissing('location');
-        }
-
-        if (in_array('station', $request->get('include'), true)) {
-            $result = $admin->loadMissing('station');
-        }
         return response()->json([
             'status' => true,
             'message' => 'Information admin',
-            'data' => AdminResource::make($result)
-        ], 201);
+            'data' => AdminResource::make($admin)
+        ], 200);
     }
 
 
@@ -101,28 +85,13 @@ class AdminController extends Controller
     public function store(StoreRequest $request): JsonResponse
     {
         $admin = Admin::create(array_merge(
-            $request->safe()->except(['cic_front', 'cic_back', 'avatar', 'location']),
+            $request->safe()->except(['password']),
             ['password' => bcrypt($request->validated('password'))]
         ));
 
-        $admin->location()->create($request->validated('location'));
-
-        $admin->images()->create([
-            'link' => $request->validated('avatar'),
-            'type' => ImageEnum::AVATAR,
-        ]);
-        $admin->images()->create([
-            'link' => $request->validated('cic_front'),
-            'type' => ImageEnum::CIC_FRONT,
-        ]);
-        $admin->images()->create([
-            'link' => $request->validated('cic_back'),
-            'type' => ImageEnum::CIC_BACK
-        ]);
-
         return response()->json([
             'status' => true,
-            'message' => 'Successfully station created',
+            'message' => 'Successfully created',
             'data' => AdminResource::make($admin->loadMissing(['location', 'station', 'images']))
         ], 201);
     }
@@ -135,7 +104,10 @@ class AdminController extends Controller
      */
     public function update(Admin $admin, UpdateRequest $request): JsonResponse
     {
-        $admin->update($request->all());
+        $admin->update(array_merge(
+            $request->safe()->except(['password']),
+            ['password' => bcrypt($request->validated('password'))]
+        ));
         return response()->json([
             'status' => true,
             'message' => 'Successfully updated',

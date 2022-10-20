@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\Api\V1\Admins;
 
 use App\Enums\ImageEnum;
+use App\Exceptions\ImageException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Admins\UpdateImageRequest;
+use App\Http\Requests\V1\Images\StoreRequest;
+use App\Http\Resources\V1\ImageResource;
 use App\Models\Admin;
+use App\Services\ImageService;
 use Illuminate\Http\JsonResponse;
 
 class ImageAdminController extends Controller
 {
     protected $adminModel;
+    protected $imageService;
 
     /**
      * @param  Admin  $adminModel
+     * @param  ImageService  $imageService
      */
-    public function __construct(Admin $adminModel)
+    public function __construct(Admin $adminModel, ImageService $imageService)
     {
         $this->adminModel = $adminModel;
+        $this->imageService = $imageService;
     }
 
     /**
@@ -28,45 +34,62 @@ class ImageAdminController extends Controller
     {
         return response()->json([
             'status' => true,
-            'message' => 'Information location of the admin',
-            'data' => [
-                'avatar' => $admin->getImageLinkByType(ImageEnum::AVATAR),
-                'cic_front' => $admin->getImageLinkByType(ImageEnum::CIC_FRONT),
-                'cic_back' => $admin->getImageLinkByType(ImageEnum::CIC_BACK),
-            ],
-        ], 201);
+            'message' => 'Information images of the admin',
+            'data' => ImageResource::collection($admin->images)
+        ], 200);
     }
 
     /**
      * @param  Admin  $admin
-     * @param  UpdateImageRequest  $request
+     * @param  StoreRequest  $request
      * @return JsonResponse
+     * @throws ImageException
      */
-    public function update(Admin $admin, UpdateImageRequest $request): JsonResponse
+    public function store(Admin $admin, StoreRequest $request): JsonResponse
     {
-        if($request->has('avatar')){
-            $admin->images()->where('type', '=', ImageEnum::AVATAR)->update([
-                'link' => $request->validated('avatar'),
+        $images = $request->file('images');
+
+        $fileNameAvatar = 'admins_'.ImageEnum::AVATAR.'_'.$admin->id.'-'.$images[0]->hashName();
+        $fileNameCICFront = 'admins_'.ImageEnum::CIC_FRONT.'_'.$admin->id.'-'.$images[1]->hashName();
+        $fileNameCICBack = 'admins_'.ImageEnum::CIC_BACK.'_'.$admin->id.'-'.$images[2]->hashName();
+
+        if ($images[0]->isValid()) {
+            $path = $this->imageService->uploadImage($images[0], 'admins', $fileNameAvatar);
+            $admin->images()->create([
+                'name' => $fileNameAvatar,
+                'link' => $path,
+                'type' => ImageEnum::AVATAR,
             ]);
+        } else {
+            throw  new ImageException('Validation images error', 400);
         }
-        if($request->has('cic_front')){
-            $admin->images()->where('type', '=', ImageEnum::CIC_FRONT)->update([
-                'link' => $request->validated('cic_front'),
+
+        if ($images[1]->isValid()) {
+            $path = $this->imageService->uploadImage($images[1], 'admins', $fileNameCICFront);
+            $admin->images()->create([
+                'name' => $fileNameCICFront,
+                'link' => $path,
+                'type' => ImageEnum::CIC_FRONT,
             ]);
+        } else {
+            throw  new ImageException('Validation images error', 400);
         }
-        if($request->has('cic_back')){
-            $admin->images()->where('type', '=', ImageEnum::CIC_BACK)->update([
-                'link' => $request->validated('cic_back'),
+
+        if ($images[2]->isValid()) {
+            $path = $this->imageService->uploadImage($images[2], 'admins', $fileNameCICBack);
+            $admin->images()->create([
+                'name' => $fileNameCICBack,
+                'link' => $path,
+                'type' => ImageEnum::CIC_BACK,
             ]);
+        } else {
+            throw  new ImageException('Validation images error', 400);
         }
+
         return response()->json([
             'status' => true,
             'message' => 'Successfully created',
-            'data' => [
-                'avatar' => $admin->getImageLinkByType(ImageEnum::AVATAR),
-                'cic_front' => $admin->getImageLinkByType(ImageEnum::CIC_FRONT),
-                'cic_back' => $admin->getImageLinkByType(ImageEnum::CIC_BACK),
-            ],
+            'data' => ImageResource::collection($admin->images)
         ], 201);
     }
 

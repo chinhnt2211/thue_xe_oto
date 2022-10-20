@@ -14,8 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $first_name
- * @property string $last_name
+ * @property string $full_name
  * @property string $email
  * @property string|null $address_line_1
  * @property int|null $address_line_2
@@ -50,6 +49,19 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $cic_number
+ * @property int $role
+ * @property int|null $station_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\Location|null $location
+ * @property-read \App\Models\Station|null $station
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin filter($filters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin filterByLocation($filters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereCicNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereStationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereFullName($value)
  */
 class Admin extends Authenticatable
 {
@@ -62,14 +74,14 @@ class Admin extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'first_name',
-        'last_name',
+        'full_name',
         'email',
         'phone',
         'password',
         'cic_number',
         'dob',
         'gender',
+        'role',
         'status',
         'station_id'
     ];
@@ -129,11 +141,8 @@ class Admin extends Authenticatable
     public function scopeFilter($query, $filters)
     {
         return $query
-            ->when(isset($filters['first_name']), function ($q) use ($filters) {
-                $q->where('first_name', 'like', "%{$filters['first_name']}%");
-            })
-            ->when(isset($filters['last_name']), function ($q) use ($filters) {
-                $q->where('last_name', 'like', "%{$filters['last_name']}%");
+            ->when(isset($filters['full_name']), function ($q) use ($filters) {
+                $q->where('full_name', 'like', "%{$filters['full_name']}%");
             })
             ->when(isset($filters['email']), function ($q) use ($filters) {
                 $q->where('email', 'like', "%{$filters['email']}%");
@@ -144,6 +153,5 @@ class Admin extends Authenticatable
             ->when(isset($filters['role']), function ($q) use ($filters) {
                 $q->where('role', '=', $filters['role']);
             });
-
     }
 }

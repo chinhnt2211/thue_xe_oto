@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\V1\Admins;
 
+use App\Enums\AdminStatusEnum;
 use App\Enums\GenderEnum;
 use App\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
@@ -29,27 +30,26 @@ class UpdateRequest extends FormRequest
         $method = $this->method();
         if ($method === 'PUT') {
             return [
-                'first_name' => ['required', 'string'],
-                'last_name' => ['required', 'string'],
-                'email' => ['required', 'string', 'email'],
+                'full_name' => ['required', 'string'],
                 'password' => ['required', 'string'],
                 'phone' => ['required', 'string'],
                 'cic_number' => ['required', 'string'],
                 'dob' => ['required', 'date'],
                 'gender' => ['required', 'integer', Rule::in(GenderEnum::getAllEnums())],
                 'role' => ['required', 'integer', Rule::in(RoleEnum::getAdminEnums())],
+                'status' => ['required', 'integer', Rule::in(AdminStatusEnum::getAllEnums())],
                 'station_id' => ['required', 'integer']
             ];
         }
         return [
-            'first_name' => ['sometimes', 'required', 'string'],
-            'last_name' => ['sometimes', 'required', 'string'],
-            'email' => ['sometimes', 'required', 'string', 'email'],
+            'full_name' => ['sometimes', 'required', 'string'],
+            'password' => ['sometimes', 'required', 'string'],
             'phone' => ['sometimes', 'required', 'string'],
             'cic_number' => ['sometimes', 'required', 'string'],
             'dob' => ['sometimes', 'required', 'date'],
             'gender' => ['sometimes', 'required', 'integer', Rule::in(GenderEnum::getAllEnums())],
             'role' => ['sometimes', 'required', 'integer', Rule::in(RoleEnum::getAdminEnums())],
+            'status' => ['sometimes', 'integer', Rule::in(AdminStatusEnum::getAllEnums())],
             'station_id' => ['sometimes', 'required', 'integer']
         ];
     }
