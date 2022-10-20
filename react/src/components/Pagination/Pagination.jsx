@@ -27,8 +27,8 @@ function Pagination({
                 </span>{' '}
                 to{' '}
                 <span className="font-semibold text-gray-900 dark:text-white">
-                    {meta.total >= meta.per_page * meta.current_page + 1
-                        ? meta.per_page * meta.current_page + 1
+                    {meta.total >= meta.per_page * meta.current_page 
+                        ? meta.per_page * meta.current_page 
                         : meta.total}
                 </span>{' '}
                 of <span className="font-semibold text-gray-900 dark:text-white">{meta.total}</span> Entries
