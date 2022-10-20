@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,6 +33,13 @@ class Brand extends Model
         'name',
     ];
 
+
+    /**
+     * @param $query
+     * @param $filters
+     * @return mixed
+     * @throws ModelNotFoundException
+     */
     public function scopeFilter($query, $filters)
     {
         return $query

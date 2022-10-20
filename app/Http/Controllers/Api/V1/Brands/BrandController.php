@@ -2,25 +2,31 @@
 
 namespace App\Http\Controllers\Api\V1\Brands;
 
+use App\Exceptions\UnauthenticatedException;
+use App\Exceptions\UnauthorizedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Brands\IndexRequest;
-use App\Http\Requests\V1\Brands\ShowRequest;
 use App\Http\Requests\V1\Brands\StoreRequest;
 use App\Http\Requests\V1\Brands\UpdateRequest;
 use App\Http\Resources\V1\BrandResource;
 use App\Models\Brand;
+use App\Services\CheckAuthService;
 use Illuminate\Http\JsonResponse;
 
 class BrandController extends Controller
 {
     protected $brandModel;
+    protected $checkAuthService;
 
     /**
      * @param  Brand  $brandModel
+     * @param  CheckAuthService  $checkAuthService
      */
-    public function __construct(Brand $brandModel)
+    public function __construct(Brand $brandModel, CheckAuthService $checkAuthService)
     {
         $this->brandModel = $brandModel;
+        $this->checkAuthService = $checkAuthService;
+
     }
 
 
@@ -32,7 +38,7 @@ class BrandController extends Controller
     {
         $brands = Brand::filter($request->all());
 
-        $brands = $brands->paginate(10);
+        $brands = $brands->orderBy('id', 'desc')->paginate(10);
         return response()->json([
             'state' => true,
             'message' => 'List of Brands',
@@ -47,6 +53,7 @@ class BrandController extends Controller
                 'page' => [
                     'total' => $brands->total(),
                     'count' => $brands->count(),
+                    'per_page' => $brands->perPage(),
                     'current_page' => $brands->currentPage(),
                     'last_page' => $brands->lastPage(),
                 ]
@@ -56,19 +63,17 @@ class BrandController extends Controller
 
 
     /**
-     * @param  ShowRequest  $request
      * @param  Brand  $brand
      * @return JsonResponse
      */
 
-    public function show(ShowRequest $request, Brand $brand): JsonResponse
+    public function show(Brand $brand): JsonResponse
     {
-
         return response()->json([
             'status' => true,
-            'message' => 'Information brand',
+            'message' => 'Information of brand',
             'data' => BrandResource::make($brand)
-        ], 201);
+        ], 200);
     }
 
 
@@ -82,7 +87,7 @@ class BrandController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Successfully brand created',
+            'message' => 'Successfully created',
             'data' => BrandResource::make($brand)
         ], 201);
     }
@@ -106,19 +111,21 @@ class BrandController extends Controller
     /**
      * @param  Brand  $brand
      * @return JsonResponse
+     * @throws UnauthenticatedException|UnauthorizedException
      */
     public function destroy(Brand $brand): JsonResponse
     {
-        if(auth()->check()){
-            $brand->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Successful Delete',
-                'data' => [],
-            ], 200);
-        };
-        return response()->json([
-            "message" => "Unauthenticated"
-        ]);
+        if ($this->checkAuthService->checkAuthenticate()) {
+            if ($this->checkAuthService->checkAuthorizedAdmin()) {
+                $brand->delete();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Successfully deleted',
+                    'data' => [],
+                ], 200);
+            }
+            throw new UnauthorizedException('Unauthorized', 403);
+        }
+        throw new UnauthenticatedException("Unauthenticated", 401);
     }
 }
