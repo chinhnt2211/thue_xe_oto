@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1\Stations;
 
+use App\Exceptions\AnExistingRecord;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Stations\StoreLocationRequest;
-use App\Http\Requests\V1\Stations\UpdateLocationRequest;
+use App\Http\Requests\V1\Locations\StoreLocationRequest;
+use App\Http\Requests\V1\Locations\UpdateLocationRequest;
 use App\Http\Resources\V1\LocationResource;
 use App\Models\Station;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +32,7 @@ class LocationStationController extends Controller
             'status' => true,
             'message' => 'Information location of the station',
             'data' => LocationResource::make($station->location),
-        ], 201);
+        ], 200);
     }
 
 
@@ -39,17 +40,23 @@ class LocationStationController extends Controller
      * @param  Station  $station
      * @param  StoreLocationRequest  $request
      * @return JsonResponse
+     * @throws AnExistingRecord
      */
     public function store(Station $station, StoreLocationRequest $request): JsonResponse
     {
-        $station->location()->create($request->all());
+        if ($station->location === null) {
+            $location = $station->location()->create($request->all());
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Successfully created',
-            'data' => LocationResource::make($station->location),
-        ], 201);
+            return response()->json([
+                'status' => true,
+                'message' => 'Successfully created',
+                'data' => LocationResource::make($location),
+            ], 201);
+        }
+
+        throw new AnExistingRecord('An existing record', 400);
     }
+
     /**
      * @param  Station  $station
      * @param  UpdateLocationRequest  $request
@@ -57,32 +64,15 @@ class LocationStationController extends Controller
      */
     public function update(Station $station, UpdateLocationRequest $request): JsonResponse
     {
+
         $station->location()->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Successfully created',
+            'message' => 'Successfully updated',
             'data' => LocationResource::make($station->location),
-        ], 201);
+        ], 200);
     }
 
-    /**
-     * @param  Station  $station
-     * @return JsonResponse
-     */
-    public function destroy(Station $station): JsonResponse
-    {
-        if(auth()->check()){
-            $station->location()->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Successful Delete',
-                'data' => [],
-            ], 200);
-        };
-        return response()->json([
-            "message" => "Unauthenticated"
-        ],401);
 
-    }
 }

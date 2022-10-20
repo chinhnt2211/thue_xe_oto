@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers\Api\V1\Stations;
 
+use App\Exceptions\UnauthenticatedException;
+use App\Exceptions\UnauthorizedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Stations\IndexRequest;
-use App\Http\Requests\V1\Stations\ShowRequest;
 use App\Http\Requests\V1\Stations\StoreRequest;
 use App\Http\Requests\V1\Stations\UpdateRequest;
 use App\Http\Resources\V1\StationResource;
 use App\Models\Station;
+use App\Services\CheckAuthService;
 use Illuminate\Http\JsonResponse;
 
 class StationController extends Controller
 {
     protected $stationModel;
+    protected $checkAuthService;
 
     /**
      * @param  Station  $stationModel
+     * @param  CheckAuthService  $checkAuthService
      */
-    public function __construct(Station $stationModel)
+    public function __construct(Station $stationModel, CheckAuthService $checkAuthService)
     {
         $this->stationModel = $stationModel;
+        $this->checkAuthService = $checkAuthService;
     }
 
 
@@ -36,10 +41,7 @@ class StationController extends Controller
             $stations = $stations->filterByLocation($request->validated('location'));
         }
 
-        if (in_array('location', $request->get('include'), true)) {
-            $stations = $stations->with('location');
-        }
-        $stations = $stations->paginate(10);
+        $stations = $stations->orderBy('id', 'desc')->paginate(10);
         return response()->json([
             'state' => true,
             'message' => 'List of stations',
@@ -54,6 +56,7 @@ class StationController extends Controller
                 'page' => [
                     'total' => $stations->total(),
                     'count' => $stations->count(),
+                    'per_page' => $stations->perPage(),
                     'current_page' => $stations->currentPage(),
                     'last_page' => $stations->lastPage(),
                 ]
@@ -63,22 +66,17 @@ class StationController extends Controller
 
 
     /**
-     * @param  ShowRequest  $request
      * @param  Station  $station
      * @return JsonResponse
      */
 
-    public function show(ShowRequest $request, Station $station): JsonResponse
+    public function show(Station $station): JsonResponse
     {
-        $result = $station;
-        if (in_array('location', $request->get('include'), true)) {
-            $result = $station->loadMissing('location');
-        }
         return response()->json([
             'status' => true,
             'message' => 'Information station',
-            'data' => StationResource::make($result)
-        ], 201);
+            'data' => StationResource::make($station)
+        ], 200);
     }
 
 
@@ -88,16 +86,11 @@ class StationController extends Controller
      */
     public function store(StoreRequest $request): JsonResponse
     {
-        $with = explode(",", $request->get('with'));
-        $station = Station::create($request->safe()->only(['name', 'phone', 'capacity']));
-        if (in_array('location', $with, true)) {
-            $station->location()->create($request->validated('location'));
-        }
-
+        $station = Station::create($request->safe()->all());
         return response()->json([
             'status' => true,
-            'message' => 'Successfully station created',
-            'data' => StationResource::make($station->loadMissing('location'))
+            'message' => 'Successfully created',
+            'data' => StationResource::make($station)
         ], 201);
     }
 
@@ -120,20 +113,23 @@ class StationController extends Controller
     /**
      * @param  Station  $station
      * @return JsonResponse
+     * @throws UnauthenticatedException
+     * @throws UnauthorizedException
      */
     public function destroy(Station $station): JsonResponse
     {
-        if(auth()->check()){
-            $station->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Successful Delete',
-                'data' => [],
-            ], 200);
-        };
-        return response()->json([
-            "message" => "Unauthenticated"
-        ]);
+        if ($this->checkAuthService->checkAuthenticate()) {
+            if ($this->checkAuthService->checkAuthorizedAdmin()) {
+                $station->delete();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Successful deleted',
+                    'data' => [],
+                ], 200);
+            }
+            throw new UnauthorizedException('Unauthorized', 403);
+        }
+        throw new UnauthenticatedException("Unauthenticated", 401);
     }
 
 }

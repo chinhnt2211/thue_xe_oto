@@ -25,6 +25,7 @@ class IndexRequest extends FormRequest
     {
         return [
             'name' => ['string'],
+            'seating_capacity' => ['integer'],
             'min_capacity' => ['integer'],
             'max_capacity' => ['integer'],
             'include' => ['array'],

@@ -28,8 +28,14 @@ class StoreRequest extends FormRequest
             'name' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'capacity' => ['required', 'integer'],
-            'with' => ['string'],
-            'location' => ['array']
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'with' => explode(",", $this->include),
+        ]);
+    }
+
 }
