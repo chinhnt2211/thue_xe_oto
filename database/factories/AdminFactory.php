@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Image;
-use App\Models\Ward;
 use App\Models\Station;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,19 +19,13 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
+            'full_name' => $this->faker->firstName(),
             'email' => $this->faker->safeEmail(),
-            'address_line_2' => $this->faker->unique()->randomElement(Ward::query()->get('id')),
-            'address_line_1' => $this->faker->streetAddress(),
             'phone' => $this->faker->regexify('0[0-9]{9}'),
             'password' => $this->faker->password(),
             'cic_number' => $this->faker->regexify('0[0-9]{11}'),
-            'cic_front' => $this->faker->unique()->randomElement(Image::query()->where('type', '=', 1)->get('id')),
-            'cic_back' => $this->faker->unique()->randomElement(Image::query()->where('type', '=', 2)->get('id')),
             'dob' => $this->faker->dateTimeBetween('-50 years', '-20 years')->format('Y-m-d'),
             'gender' => $this->faker->numberBetween(0,1),
-            'avatar' => $this->faker->unique()->randomElement(Image::query()->where('type', '=', 0)->get('id')),
             'role' => 1,
             'status' => $this->faker->numberBetween(0,2),
             'station_id' => Station::query()->inRandomOrder()->value('id')

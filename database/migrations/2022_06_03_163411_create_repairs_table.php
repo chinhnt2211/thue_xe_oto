@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->text('description');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->comment('Repair Enum')->default(\App\Enums\RepairEnum::PENDING);
             $table->timestamps();
         });
     }

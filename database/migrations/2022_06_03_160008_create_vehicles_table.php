@@ -16,16 +16,14 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('status')
-                ->default(\App\Enums\VehicleStatusEnum::FREE);
             $table->integer('seating_capacity');
             $table->text('description');
             $table->string('license_number',15);
             $table->unsignedInteger('price');
             $table->unsignedInteger('rent_price');
             $table->unsignedInteger('fine');
-            $table->foreignId('station_id')->constrained();
-            $table->foreignId('brand_id')->constrained();
+            $table->foreignId('station_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

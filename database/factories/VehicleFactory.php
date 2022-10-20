@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
+use App\Models\Station;
+use Faker\Provider\Fakecar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,21 +19,20 @@ class VehicleFactory extends Factory
      */
     public function definition()
     {
-        $this->faker->addProvider(new \Faker\Provider\Fakecar($this->faker));
-        
+        $this->faker->addProvider(new Fakecar($this->faker));
+
         $price = ($this->faker->randomNumber(2)+1)*1000*1000;
 
         return [
             'name' => $this->faker->vehicle,
-            'status' => $this->faker->randomElement([0, 1, 2, 3]),
             'description' => $this->faker->sentence(),
             'license_number' => $this->faker->vehicleRegistration,
             'price' => $price,
             'rent_price' => $price/10,
             'fine' => $price/10*1.5,
-            'station_id' => $this->faker->randomElement(\App\Models\Station::get()->pluck('id')),
-            'brand_id' => $this->faker->randomElement(\App\Models\Brand::get()->pluck('id')),
-            'seating_capacity_id' => $this->faker->randomElement(\App\Models\SeatingCapacity::get()->pluck('id')),
+            'station_id' => $this->faker->randomElement(Station::get()->pluck('id')),
+            'brand_id' => $this->faker->randomElement(Brand::get()->pluck('id')),
+            'seating_capacity' => $this->faker->randomElement([4,5,7,9,11,16]),
         ];
     }
 }
