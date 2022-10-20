@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { LocationInput, ReceiveDateInput, BrandInput } from "./components";
+import LocationInput from "./LocationInput";
+import ReceiveDateInput from "./RentalPeriodInput";
+import BrandInput  from "./BrandInput";
 
 function SearchVehicles() {
     const [location, setLocation] = useState("");
@@ -15,12 +17,12 @@ function SearchVehicles() {
     dark:border-gray-700 dark:bg-gray-800"
         >
             <form className="">
-                {/* Popper Search Location */}
+                {/* Popper Search Locations */}
                 <LocationInput getLocation={(value) => {
                     setLocation(value);
                     // console.log(value);
                 }} />
-                {/* End Popper Search Location */}
+                {/* End Popper Search Locations */}
 
                 {/* Received Date */}
 
@@ -38,7 +40,7 @@ function SearchVehicles() {
                     {/* Brands */}
                     <BrandInput />
                     {/* End Brands */}
-                    
+
                     <div className=" md:col-span-1">
                         <label
                             htmlFor="first_name"

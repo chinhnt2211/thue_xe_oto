@@ -1,3 +1,3 @@
-import SearchVehicles from './SearchVehicles';
+import SearchVehicles from "./SearchVehicles";
 
 export { SearchVehicles };
