@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->foreignId('contract_id')->constrained();
-            $table->tinyInteger('type');
+            $table->foreignId('admin_id')->constrained();
+            $table->tinyInteger('type')->comment(' PaymentTypeEnum');
             $table->unsignedInteger('total');
-            $table->text('description');
             $table->timestamps();
         });
     }
